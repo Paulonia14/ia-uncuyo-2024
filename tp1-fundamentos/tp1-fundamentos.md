@@ -1,5 +1,16 @@
 Paula Martinez
 
+Ejercicio 1)
+
+
+
+Ejercicio 2)
+¿Es posible considerar a los agentes conversacionales basados en grandes modelos de lenguaje (LLMs) como conscientes?
+Según el artículo no es posible considerarlos como conscientes, ya que estos agentes son considerados "simulacra" de comportamiento humano, es decir, son meras imitaciones que pueden replicar ciertos aspectos del comportamiento lingüístico humano, pero carecen de los atributos fundamentales que asociamos con la conciencia. Estos agentes no participan plenamente en el "juego de lenguaje" humano porque no pueden verificar la realidad externa y ajustar su comportamiento en consecuencia, lo cual es esencial para tener creencias, intenciones, y conciencia.
+
+¿Cuáles son las implicaciones éticas de atribuir conciencia y, por ende, "derechos morales" a los agentes de IA avanzados?
+Una preocupación es que, si una comunidad llega a la conclusión de que estos agentes son conscientes y, por lo tanto, capaces de sufrir, podría surgir la obligación moral de protegerlos. Esta idea plantea la posibilidad de que la sociedad pudiera desviar recursos y atención de los problemas humanos hacia la protección de las máquinas, lo que sería problemático desde un punto de vista ético. Aunque el artículo sugiere que, aunque los seres humanos podrían empezar a tratar a estos agentes como seres conscientes, esto no significa necesariamente que lo sean, y cualquier decisión ética debería considerar la verdadera naturaleza de estos agentes como "simulacra" y no como seres conscientes.
+
 Ejercicio 3)
 
 Estoy de acuerdo en que la gente se enfoca mucho en cómo piensa la máquina y que esta va a hacer "cosas malas" , cuando la máquina en realidad no piensa y solo sigue patrones. 
