@@ -8,12 +8,12 @@ dirt_rates = [0.1, 0.2, 0.4, 0.8]
 iterations = 10
 results = []
 
-def run_simulation(sizeX, sizeY, dirt_rate, steps=1000):  #Genera posiciones aleatorias para el agente
+def run_simulation(sizeX, sizeY, dirt_rate):  #Genera posiciones aleatorias para el agente
     init_posX = random.randint(0, sizeX - 1)
     init_posY = random.randint(0, sizeY - 1)
     env = Environment(sizeX, sizeY, init_posX, init_posY, dirt_rate)
     agent = Agent(env)
-    for _ in range(steps):
+    while agent.lives > 0:
         agent.think()
     return env.performance
 
