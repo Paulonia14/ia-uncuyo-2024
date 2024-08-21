@@ -1,7 +1,7 @@
 import random
 
 class Agent:
-    def __init__(self, env):
+    def __init__(self, env, lives=1000):
         self.env = env
         self.lives = lives  #Vidas del agente (empieza con 1000)
 
