@@ -1,4 +1,4 @@
-##Para cada una de las siguientes actividades, describa el PEAS para cada tarea y caracterizarlo
+###Para cada una de las siguientes actividades, describa el PEAS para cada tarea y caracterizarlo
 en término de las propiedades vistas.
 
 - **Jugar al Counter-Strike**

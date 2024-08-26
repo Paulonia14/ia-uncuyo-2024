@@ -8,12 +8,14 @@ class Environment:
         self.grid = [['' for i_ in range(sizeY)] for _ in range(sizeX)]
         self.performance = 0
         self.dirt_rate = dirt_rate
+        self.dirt_left = 0
 
         # Colocar suciedad según el dirt_rate
         for i in range(sizeX):
             for j in range(sizeY):
                 if random.random() < dirt_rate:  #num entre 0 y 1
                     self.grid[i][j] = 'Dirt'  #Si es menor al dirt rate, entonces está sucio
+                    self.dirt_left += 1
 
     def accept_action(self, action):
         x, y = self.agent_pos
@@ -29,6 +31,9 @@ class Environment:
             if self.grid[x][y] == 'Dirt':
                 self.grid[x][y] = ' '  # El agente limpia
                 self.performance += 1  #Sumamos un punto por limpiar
+                self.dirt_left -= 1
+            else:
+                pass
         elif action == 'Idle':
             pass
 
@@ -42,5 +47,5 @@ class Environment:
     def print_environment(self):
         for i in range(self.sizeX):
             for j in range(self.sizeY):
-                print(self.matrix[i][j], end=' ')
+                print(self.grid[i][j], end=' ')
             print( )

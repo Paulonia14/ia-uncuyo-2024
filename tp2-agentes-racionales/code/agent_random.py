@@ -1,6 +1,6 @@
 import random
 
-class Agent:
+class AgentRandom:
     def __init__(self, env, lives=1000):
         self.env = env
         self.lives = lives  #Vidas del agente (empieza con 1000)
@@ -33,6 +33,10 @@ class Agent:
         return self.env.is_dirty() #Si es que la pos está sucia
 
     def think(self): #Independientemente de dónde esté va a limpiar, moverse o quedarse (aleatoriamente)
+        if self.env.dirt_left == 0:
+            return
+        if self.lives == 0:
+            return
         action = random.choice(['up', 'down', 'left', 'right', 'clean', 'idle'])
         if action == 'up':
             self.up()

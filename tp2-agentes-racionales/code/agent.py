@@ -1,9 +1,9 @@
 import random
 
 class Agent:
-    def __init__(self, env, lives=1000):
+    def __init__(self, env):
         self.env = env
-        self.lives = lives  #Vidas del agente (empieza con 1000)
+        self.lives = 1000  #Vidas del agente (empieza con 1000)
 
     def up(self):
         self.env.accept_action('Up')
@@ -33,6 +33,10 @@ class Agent:
         return self.env.is_dirty() #Si es que la pos está sucia
 
     def think(self):
+        if self.env.dirt_left == 0:
+            return
+        if self.lives == 0:
+            return
         if self.perspective():
             self.clean()
         else:
