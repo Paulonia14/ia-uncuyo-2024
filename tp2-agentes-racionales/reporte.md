@@ -55,6 +55,7 @@ Primero analicemos el performance (cantidad de celdas limpiadas) de los dos agen
 ![Performance 0.2](./images/perf_20.png)
 ![Performance 0.4](./images/perf_40.png)
 ![Performance 0.8](./images/perf_80.png)
+
 Viendo los gráficos podemos observar que el agente reflexivo es significativamente mejor al agente aleatorio. Esto tiene
 sentido, ya que el agente random al ser todos sus movimientos aleatorios, aunque se encuentre en una celda sucia, es 
 bastante probable que no la limpie, o lo termine haciendo después. Podemos observar también que, a medida que crece el
@@ -66,9 +67,16 @@ suciedad:
 ![vidas 0.2](./images/vidas_20.png)
 ![vidas 0.4](./images/vidas_40.png)
 ![vidas 0.8](./images/vidas_80.png)
+
 Viendo estos gráficos podemos notar que no hay mucha diferencia entre los dos agentes, pero de igual manera sigue siendo
 más efectivo el agente reflexivo, llegando a su objetivo (en algunas ocasiones) en menor cantidad de acciones. Podemos 
 ver, además, que a medida que el entorno crece, esta diferencia entre los dos agentes se hace cada vez más pequeña.
+
+Si tenemos en cuenta la desviación estándar en, por ejemplo, el porcentaje de suciedad de 10% y 80%, tenemos estos gráficos: 
+![perf con desv est 0.1](./images/perf_condesvest_10.png)
+![perf con desv est 0.8](./images/perf_condesvest_80.png)
+
+Podemos observar que la desviación estándar del agente aleatorio es mucho menor a la del agente reflexivo, en cualquier porcentaje de suciedad.
 
 ## Conclusiones
 

@@ -6,6 +6,7 @@
   - Environment: Menú principal, servidores, mapas, objetos en el mapa, otros jugadores.
   - Actuators: Armas, granadas, C4, comandos de voz, movimiento (moverse, agacharse, saltar).
   - Sensors: Información del radar del mapa, información visual, sonidos, comandos de voz de otros jugadores (ej: enemigo avistado).
+  Es parcialmente observable, puede ser uniagente o multiagente, es dinámico, las acciones a elegir son discretas y los movimientos continuos.
 - ## **Explorar los Océanos**
   - Performance: Área explorada, objetos encontrados, animales avistados.
   - Environment: El océano, vida marina, barcos.
@@ -19,8 +20,9 @@
 - ## **Practicar tenis contra una pared**
   - Performance: Mejorar la precisión, velocidad y/o fuerza de los golpes, mejorar la técnica, mejorar la resistencia.
   - Environment: Cancha de tenis con una pared, una pared.
-  - Actuators: Raqueta de tenis, pelota de tenis, robot que lanza pelotas.
-  - Sensors: Movimiento, velocidad, trayectoria
+  - Actuators: Raqueta de tenis, pelota de tenis, robot que lanza pelotas (configurable).
+  - Sensors: Movimiento, velocidad, trayectoria, sonido.
+  Es totalmente observable, uniagente, estático, continuo, determinista.
 - ## **Realizar un salto de altura**
   - Performance: Saltar lo más alto posible, aplicar una correcta postura. 
   - Environment: Pista de atletismo, barra de altura. 
