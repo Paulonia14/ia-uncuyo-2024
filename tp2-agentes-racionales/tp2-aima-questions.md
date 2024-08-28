@@ -1,7 +1,8 @@
-###Respuestas 2.10 y 2.11 
+# Respuestas 2.10 y 2.11 
 
+---
 
-- **Pregunta 2.10**
+- ## **Pregunta 2.10**
 
   - **a)** 
     Un agente de reflejo simple toma decisiones basadas en el estado actual del entorno, no puede ser perfectamente racional en este entorno porque cada movimiento da lugar a una penalización.
@@ -19,7 +20,7 @@
     podría tomar decisiones informadas basadas tanto en la historia (por su memoria) como en el  estado completo del entorno.
 
 
-- **Pregunta 2.11**
+- ## **Pregunta 2.11**
 
   - **a)**
     Un agente de reflejo simple no puede ser perfectamente racional en este entorno por la falta de conocimiento sobre la geografía.
