@@ -114,7 +114,7 @@ class Agent:
                         x, y = next_pos
                         if desc[x][y] != 'H': # Agujero
                             next_state = self.position_to_state(next_pos, size)
-                            step_cost = 1
+                            step_cost = self.get_action_cost(action)
                             new_path_cost = path_cost + step_cost
                             if next_state not in explored:
                                 frontier.put((new_path_cost, next_state, path + [action]))
