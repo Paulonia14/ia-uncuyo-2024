@@ -39,6 +39,8 @@ En este trabajo se crearon en Python 3 algoritmos de búsqueda local para resolv
 algoritmos eran 'Hill Climbing', 'Simulated Annealing' y 'Genetic Algorithm'. Para cada uno de ellos se crearon
 30 tableros de NxN para cada tamaño N, siendo este 4, 8 y 10, y se ejecutaron en ellos. 
 
+Para el algoritmo Simulated Annealing se empieza con una temperatura igual a 100 y se va "enfriando" de acuerdo a un cooling rate igual a 0.99.
+
 Para el Algoritmo Genético se tuvo en cuenta este diseño:
 * Individuos: Listas de tuplas que indican la posición (en coordenadas) de las reinas.
 * Selección: Selección por ruleta (Cada individuo tiene una probabilidad de ser seleccionado por valor de fitness)
