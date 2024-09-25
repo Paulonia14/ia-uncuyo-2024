@@ -44,8 +44,8 @@ Para el Algoritmo Genético se tuvo en cuenta este diseño:
 * Selección: Selección por ruleta (Cada individuo tiene una probabilidad de ser seleccionado por valor de fitness)
 * Reemplazo: Reemplazo generacional (Se reemplaza toda la población con los hijos generados en cada generación)
 * Operadores: 
-  * Crossover: Se mezclan los genes de los padres.
-  * Mutación: Se modifica uno o más genes en un individuo de forma aleatoria.
+  * Crossover: Se mezclan los genes de los padres para generar 2 hijos.
+  * Mutación: Se modifica uno o más genes en un individuo de forma aleatoria (se selecciona una reina al azar y se cambia su fila aleatoriamente).
 
 ---
 
@@ -73,19 +73,19 @@ diferencia entre ellos, mientras que el algoritmo Hill Climbing recorre la menor
 
 Primero se observa el cambio de la función H para el algoritmo 'Hill Climbing'
 
-![h funcion hc 4](./images/hill climbing_h_function_4.png)
+![h funcion hc 4](./images/hill_climbing_h_function_4.png)
 
-![h funcion hc 8](./images/hill climbing_h_function_8.png)
+![h funcion hc 8](./images/hill_climbing_h_function_8.png)
 
-![h funcion hc 10](./images/hill climbing_h_function_10.png)
+![h funcion hc 10](./images/hill_climbing_h_function_10.png)
 
 Observemos ahora para el algoritmo 'Simulated Annealing'
 
-![h funcion sa 4](./images/simulated annealing_h_function_4.png)
+![h funcion sa 4](./images/simulated_annealing_h_function_4.png)
 
-![h funcion sa 8](./images/simulated annealing_h_function_8.png)
+![h funcion sa 8](./images/simulated_annealing_h_function_8.png)
 
-![h funcion sa 10](./images/simulated annealing_h_function_10.png)
+![h funcion sa 10](./images/simulated_annealing_h_function_10.png)
 
 
 ### Porcentajes de Éxito
