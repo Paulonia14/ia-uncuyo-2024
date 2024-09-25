@@ -73,7 +73,7 @@ diferencia entre ellos, mientras que el algoritmo Hill Climbing recorre la menor
 
 ### H Function
 
-Primero se observa el cambio de la función H para el algoritmo 'Hill Climbing'
+Se utilizò las mejores ejecuciones para cada tamaño y por cada algoritmo. Primero se observa el cambio en la función H por cada tamaño para las mejores ejecuciones del algoritmo Hill Climbing:
 
 ![h funcion hc 4](./images/hill_climbing_h_function_4.png)
 
@@ -81,7 +81,7 @@ Primero se observa el cambio de la función H para el algoritmo 'Hill Climbing'
 
 ![h funcion hc 10](./images/hill_climbing_h_function_10.png)
 
-Observemos ahora para el algoritmo 'Simulated Annealing'
+Ahora se observa el cambio en la función H por cada tamaño para las mejores ejecuciones del algoritmo Simulated Annealing:
 
 ![h funcion sa 4](./images/simulated_annealing_h_function_4.png)
 
