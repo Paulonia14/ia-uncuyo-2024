@@ -28,6 +28,7 @@ def get_cost(agent, path, scenario):
         cost = 0
     return cost
 
+
 with open('no-informada-results.csv', mode='w', newline='') as file:
 
     headers = ['algorithm_name', 'env_n', 'states_n', 'cost_e1', 'cost_e2', 'time', 'solution_found']
@@ -187,7 +188,7 @@ with open('no-informada-results.csv', mode='w', newline='') as file:
         path = []
         env.reset()
         start_time = time.time()
-        states, path = agent_random.search_path_random(initial_state, goal_state, size, desc)  # Despues mandar como parametro el scenario y devolver costo por esc
+        states, path = agent_random.search_path_random(initial_state, goal_state, size, desc)
         print("Path: ", path)
         elapsed_time = time.time() - start_time
         # Escenario 1
