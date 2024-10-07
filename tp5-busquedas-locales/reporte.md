@@ -39,13 +39,15 @@ En este trabajo se crearon en Python 3 algoritmos de búsqueda local para resolv
 algoritmos eran 'Hill Climbing', 'Simulated Annealing' y 'Genetic Algorithm'. Para cada uno de ellos se crearon
 30 tableros de NxN para cada tamaño N, siendo este 4, 8 y 10, y se ejecutaron en ellos. 
 
+Para el algoritmo Simulated Annealing se empieza con una temperatura igual a 100 y se va "enfriando" de acuerdo a un cooling rate igual a 0.99.
+
 Para el Algoritmo Genético se tuvo en cuenta este diseño:
 * Individuos: Listas de tuplas que indican la posición (en coordenadas) de las reinas.
 * Selección: Selección por ruleta (Cada individuo tiene una probabilidad de ser seleccionado por valor de fitness)
 * Reemplazo: Reemplazo generacional (Se reemplaza toda la población con los hijos generados en cada generación)
 * Operadores: 
-  * Crossover: Se mezclan los genes de los padres.
-  * Mutación: Se modifica uno o más genes en un individuo de forma aleatoria.
+  * Crossover: Se mezclan los genes de los padres para generar 2 hijos.
+  * Mutación: Se modifica uno o más genes en un individuo de forma aleatoria (se selecciona una reina al azar y se cambia su fila aleatoriamente).
 
 ---
 
@@ -71,21 +73,21 @@ diferencia entre ellos, mientras que el algoritmo Hill Climbing recorre la menor
 
 ### H Function
 
-Primero se observa el cambio de la función H para el algoritmo 'Hill Climbing'
+Se utilizò las mejores ejecuciones para cada tamaño y por cada algoritmo. Primero se observa el cambio en la función H por cada tamaño para las mejores ejecuciones del algoritmo Hill Climbing:
 
-![h funcion hc 4](./images/hill climbing_h_function_4.png)
+![h funcion hc 4](./images/hill_climbing_h_function_4.png)
 
-![h funcion hc 8](./images/hill climbing_h_function_8.png)
+![h funcion hc 8](./images/hill_climbing_h_function_8.png)
 
-![h funcion hc 10](./images/hill climbing_h_function_10.png)
+![h funcion hc 10](./images/hill_climbing_h_function_10.png)
 
-Observemos ahora para el algoritmo 'Simulated Annealing'
+Ahora se observa el cambio en la función H por cada tamaño para las mejores ejecuciones del algoritmo Simulated Annealing:
 
-![h funcion sa 4](./images/simulated annealing_h_function_4.png)
+![h funcion sa 4](./images/simulated_annealing_h_function_4.png)
 
-![h funcion sa 8](./images/simulated annealing_h_function_8.png)
+![h funcion sa 8](./images/simulated_annealing_h_function_8.png)
 
-![h funcion sa 10](./images/simulated annealing_h_function_10.png)
+![h funcion sa 10](./images/simulated_annealing_h_function_10.png)
 
 
 ### Porcentajes de Éxito
