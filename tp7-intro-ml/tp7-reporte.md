@@ -95,8 +95,8 @@ a) La distancia euclidiana entre dos puntos \( (X_1, X_2, X_3) \) y \( (Y_1, Y_2
 - 5: Distancia = sqrt{2}
 - 6: Distancia = sqrt{3}
 
-b) Para K = 1, usamos el vecino más cercano para hacer la predicción, el cual es la Observación 5 con una distancia de sqrt{2} = 1.41, y su respuesta Y es **Green**.
-Así que la predicción para K=1 es **Green**.
+b) Para K = 1, usamos el vecino más cercano para hacer la predicción, el cual es la Observación 5 con una distancia de sqrt{2} = 1.41, y su respuesta Y es **Green**.    
+Por lo tanto, la predicción para K=1 es **Green**.
 
 c) Para K = 3, vemos los 3 vecinos más cercanos:
 - Observación 5 (Green, distancia 1.41)
