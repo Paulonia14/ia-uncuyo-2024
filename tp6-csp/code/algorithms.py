@@ -134,3 +134,6 @@ def genetic_algorithm(queens, size, population_size=100, max_generations=10000, 
             return True, steps, generation
     # Si no se encontró una solución
     return False, steps, max_generations
+
+def CSP_backtracking(queens, size):
+    pass
