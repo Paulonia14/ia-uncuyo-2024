@@ -12,7 +12,7 @@
    - (d) La varianza de los términos de error, es decir, σ2 = Var(ϵ), es extremadamente alta.
 
 ### Respuesta:
-a) En este caso si la muestra es muy grande es conveniente usar un modelo flexible, ya que se puede aprovechar la gran cantidad de datos para modelar relaciones más complejas y no corre el riesgo de sobreajustar por el tamaño de la muestra.
+a) En este caso si la muestra es muy grande es conveniente usar un modelo flexible, ya que se puede aprovechar la gran cantidad de datos para modelar relaciones más complejas.
 
 b) Si el número de predictores es muy grande y el número de observaciones pequeño, entonces es conveniente usar un modelo más restrictivo para evitar "overfitting".   
 
@@ -28,9 +28,9 @@ d) En este caso un modelo flexible es peor ya que una alta varianza (mayor dispe
     - (c) Nos interesa predecir el % de variación del tipo de cambio USD/Euro en relación con las variaciones semanales de los mercados bursátiles mundiales. Por lo tanto, recogemos datos semanales para todo el año 2012. Para cada semana registramos el % de cambio en el USD/Euro, el % de cambio en el mercado estadounidense, el % de cambio en el británico y el % de cambio en el mercado alemán.
 
 ### Respuesta:
-a) Esto es un problema de **regresión** y nos interesa la **inferencia** ya que queremos saber qué factores afectan  al salario del CEO. **n = 500, p = 4**  
-b) Es un problema de **clasificación** ya que queremos saber si es exitoso o no, y nos interesa la **predicción**. **n = 20, p = 14**  
-c) Es un problema de **regresión** y nos interesa la **predicción**. **n = 52, p = 4**
+a) Esto es un problema de **regresión** y nos interesa la **inferencia** ya que queremos saber qué factores afectan  al salario del CEO. **n = 500, p = 3**  
+b) Es un problema de **clasificación** ya que queremos saber si es exitoso o no, y nos interesa la **predicción**. **n = 20, p = 13**  
+c) Es un problema de **regresión** y nos interesa la **predicción**. **n = 52, p = 3**
 
 ---
 ## Pregunta 5
@@ -102,6 +102,7 @@ c) Para K = 3, vemos los 3 vecinos más cercanos:
 - Observación 5 (Green, distancia 1.41)
 - Observación 6 (Red, distancia 1.73)
 - Observación 2 (Red, distancia 2)
+
 Por lo tanto, la predicción para K = 3 es **Red**, ya que es la mayoría.
 
 d) Si la frontera de decisión de Bayes es altamente no lineal, esperaríamos que el mejor valor para K sea pequeño. Un menor K permite que el algoritmo sea más flexible y sensible a las variaciones locales de los datos. Un K grande daría lugar a un límite de decisión que estaría más cerca de una forma lineal.
