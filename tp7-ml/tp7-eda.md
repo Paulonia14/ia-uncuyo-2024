@@ -4,7 +4,7 @@
 
 ![inclinacion_peligrosa](./images/inclinacion_peligrosa.png)
 
-Se puede observar que está sesgada, es decir, hay más inclinaciones no peligrosas en comparación a las peligrosas.
+Se puede observar que hay más inclinaciones no peligrosas en comparación a las peligrosas. Está sesgada a derecha y está sumamente desbalanceado. 
 - No peligrosos: 22663 árboles.
 - Peligrosos: 2867 árboles.
 
@@ -30,7 +30,7 @@ la especie más segura.
 
 # Gráficos ejercicio 3
 
-Bins utilizados = [10, 20, 30, 40]
+Bins utilizados = [10, 35, 60, 90]
 
 #### Histogramas de circunferencias de tronco por bins 
 
