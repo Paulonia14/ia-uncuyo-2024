@@ -108,7 +108,7 @@ def plot_histogram_by_class(df, variable, class_variable, bins_list):
     plt.show()
     plt.clf()
 
-bins_list = [10, 20, 30, 40]
+bins_list = [10, 35, 60, 90]
 plot_histogram(df_train, 'circ_tronco_cm', bins_list)
 plot_histogram_by_class(df_train, 'circ_tronco_cm', 'inclinacion_peligrosa', bins_list)
 
