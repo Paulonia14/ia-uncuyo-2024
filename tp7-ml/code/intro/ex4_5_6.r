@@ -1,6 +1,6 @@
 suppressMessages(library(dplyr))
 
-set.seed(148)
+set.seed(42)
 
 data <- read.csv('D:/Paula/Facultad/2024 segundo semestre/Inteligencia Artificial/Repo/ia-uncuyo-2024/tp7-ml/data/arbolado-mendoza-dataset-validation.csv')
 
@@ -72,3 +72,49 @@ print(confusion_matrix_biggerclass_matrix)
 
 # ----- Ejercicio 6 -----
 
+accuracy <- function(TP, TN, FP, FN) {
+  (TP + TN) / (TP + TN + FP + FN)
+}
+
+precision <- function(TP, FP) {
+  if ((TP + FP) == 0) {
+    return(0)
+  } else {
+    return(TP / (TP + FP))
+  }
+}
+
+
+sensitivity <- function(TP, FN) {
+  TP / (TP + FN)
+}
+
+specificity <- function(TN, FP) {
+  TN / (TN + FP)
+}
+
+# Valores de la matriz de confusión (aleatorio)
+TP_4 <- true_positive 
+TN_4 <- true_negative  
+FP_4 <- false_positive 
+FN_4 <- false_negative 
+
+# Calcular métricas para el clasificador aleatorio
+cat("Métricas para el clasificador aleatorio:\n")
+cat("Accuracy:", accuracy(TP_4, TN_4, FP_4, FN_4), "\n")
+cat("Precision:", precision(TP_4, FP_4), "\n")
+cat("Sensitivity:", sensitivity(TP_4, FN_4), "\n")
+cat("Specificity:", specificity(TN_4, FP_4), "\n\n")
+
+# Valores de la matriz de confusión (clase mayoritaria)
+TP_5 <- confusion_matrix_biggerclass$True_Positive  
+TN_5 <- confusion_matrix_biggerclass$True_Negative  
+FP_5 <- confusion_matrix_biggerclass$False_Positive 
+FN_5 <- confusion_matrix_biggerclass$False_Negative 
+
+# Calcular métricas para el clasificador por clase mayoritaria
+cat("Métricas para el clasificador por clase mayoritaria:\n")
+cat("Accuracy:", accuracy(TP_5, TN_5, FP_5, FN_5), "\n")
+cat("Precision:", precision(TP_5, FP_5), "\n")
+cat("Sensitivity:", sensitivity(TP_5, FN_5), "\n")
+cat("Specificity:", specificity(TN_5, FP_5), "\n")

@@ -10,21 +10,16 @@ os.makedirs(images_folder, exist_ok=True)
 
 # ---------- Ejercicio 1 ----------
 # ---- Dividir CSV ---- 
-
-# Cargar el archivo CSV
 file_path = '../../data/arbolado-mza-dataset.csv'
 data = pd.read_csv(file_path)
-
-# Dividir el 80% para entrenamiento y 20% para validación de manera uniforme
+# Dividir el 80% para entrenamiento y 20% para validación
 train_data, validation_data = train_test_split(data, test_size=0.2, random_state=42)
 
-# Guardar los archivos
 train_file_path = '../../data/arbolado-mendoza-dataset-train.csv'
 validation_file_path = '../../data/arbolado-mendoza-dataset-validation.csv'
 
 train_data.to_csv(train_file_path, index=False)
 validation_data.to_csv(validation_file_path, index=False)
-
 (train_file_path, validation_file_path)
 
 # ---------- Ejercicio 2 ----------
