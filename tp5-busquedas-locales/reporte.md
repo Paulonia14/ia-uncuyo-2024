@@ -6,7 +6,7 @@
 ## Introducción
 
 En el presente informe se muestra los distintos resultados al utilizar 3 algoritmos distintos para
-resolver, en el lenguaje Python, el problema de las N Reinas en un entorno NxN, siendo N los tamaños 4, 8 y 10.
+resolver, en el lenguaje Python, el problema de las N Reinas en un entorno NxN, siendo N los tamaños 4, 8 y 10. Los algoritmos utilizados son Hill Climbing, Simulated Annealing y Genetic Algorithm. Se comienza con una breve explicación de cada uno de los algoritmos, seguido de una descripción del problema a resolver y el diseño experimental. Luego se presentan los resultados obtenidos y se realiza un análisis de los mismos, para poder llegar a una conclusión.
 
 ---
 ## Marco teórico
@@ -29,8 +29,7 @@ de una función en un espacio de búsqueda grande. Se busca minimizar o maximiza
 
 ### Genetic Algorithm 
 
-Los algoritmos genético son una técnica de búsqueda local para encontrar soluciones a problemas de 
-optimización y aprendizaje, inspirada en los mecanismos de selección natural y evolución de las especies.
+Los algoritmos genético son una técnica de búsqueda local para encontrar soluciones a problemas de  optimización y aprendizaje, inspirada en los mecanismos de selección natural y evolución de las especies.
 
 ---
 ## Diseño Experimental
@@ -46,8 +45,16 @@ Para el Algoritmo Genético se tuvo en cuenta este diseño:
 * Selección: Selección por ruleta (Cada individuo tiene una probabilidad de ser seleccionado por valor de fitness)
 * Reemplazo: Reemplazo generacional (Se reemplaza toda la población con los hijos generados en cada generación)
 * Operadores: 
-  * Crossover: Se mezclan los genes de los padres para generar 2 hijos.
-  * Mutación: Se modifica uno o más genes en un individuo de forma aleatoria (se selecciona una reina al azar y se cambia su fila aleatoriamente).
+  * Crossover: Se mezclan los genes de los padres para generar 2 hijos. El crossover utilizado es el de un punto (se selecciona un único punto de cruce de manera aleatoria). No hay probabilidad de crossover, ya que se aplica en cada reproducción.
+  * Mutación: Se modifica uno o más genes en un individuo de forma aleatoria (se selecciona una reina al azar y se cambia su fila aleatoriamente). La probabilidad de mutación está definida por el parámetro mutation_rate, que tiene un valor de 0.1.
+
+Fitness usado: La función fitness_f usa h para calcular el número de pares de reinas que no están en conflicto (la función h representa la cantidad de pares de reinas en conflicto en un tablero). 
+
+Métricas de rendimiento:
+- Tiempo de ejecución: Se mide el tiempo que tarda en encontrar una solución.
+- Estados visitados: Se mide la cantidad de estados visitados hasta encontrar una solución.
+- H function: Se muestra la evolución de la función h en cada iteración.
+- Porcentaje de éxito: Se mide la cantidad de veces que se encontró una solución en las 30 ejecuciones (solution_found).
 
 ---
 
@@ -73,7 +80,7 @@ diferencia entre ellos, mientras que el algoritmo Hill Climbing recorre la menor
 
 ### H Function
 
-Se utilizò las mejores ejecuciones para cada tamaño y por cada algoritmo. Primero se observa el cambio en la función H por cada tamaño para las mejores ejecuciones del algoritmo Hill Climbing:
+Se utilizó las mejores ejecuciones para cada tamaño y por cada algoritmo. Primero se observa el cambio en la función H por cada tamaño para las mejores ejecuciones del algoritmo Hill Climbing:
 
 ![h funcion hc 4](./images/hill_climbing_h_function_4.png)
 
@@ -88,6 +95,12 @@ Ahora se observa el cambio en la función H por cada tamaño para las mejores ej
 ![h funcion sa 8](./images/simulated_annealing_h_function_8.png)
 
 ![h funcion sa 10](./images/simulated_annealing_h_function_10.png)
+
+Por último, se observa el cambio en la función H por cada tamaño para las mejores ejecuciones del algoritmo Genético:
+
+![h funcion ga 8](./images/genetic_algorithm_h_function_8.png)
+
+![h funcion ga 10](./images/genetic_algorithm_h_function_10.png)
 
 
 ### Porcentajes de Éxito

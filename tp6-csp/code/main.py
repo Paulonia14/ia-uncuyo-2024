@@ -1,50 +1,60 @@
-from board import *
-import algorithms
 import time
 import csv
 import random
 import plot
+from board import generate_board
+import algorithms
+import pandas as pd
 
 def run_experiment(sizes=[4, 8, 10], runs=30, filename='results.csv'):
     results = []
-    time_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
-    steps_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
-    success_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
-    h_history_data = {'Simulated Annealing': [], 'Hill Climbing': []}
-    all_time_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
-    all_steps_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
+    time_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': [], 'CSP Backtracking': [], 'CSP Forward Checking': []}
+    steps_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': [], 'CSP Backtracking': [], 'CSP Forward Checking': []}
+    success_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': [], 'CSP Backtracking': [], 'CSP Forward Checking': []}
+    all_time_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': [], 'CSP Backtracking': [], 'CSP Forward Checking': []}
+    all_steps_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': [], 'CSP Backtracking': [], 'CSP Forward Checking': []}
 
     for size in sizes:
-        for algorithm in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm']:
+        for algorithm in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm', 'CSP Backtracking', 'CSP Forward Checking']:
             successes = 0
             times = []
             steps_list = []
-            h_histories = []
+
             for _ in range(runs):
                 board, queens = generate_board(size)
                 start_time = time.time()
 
+                # Seleccionar el algoritmo
                 if algorithm == 'Simulated Annealing':
-                    solution_found, steps, final_temp, h_history = algorithms.simulated_annealing(board, size, queens)
-                    h_histories.append(h_history)
+                    solution_found, steps, _, _ = algorithms.simulated_annealing(board, size, queens)
                 elif algorithm == 'Hill Climbing':
-                    solution_found, steps, h_history = algorithms.hill_climbing(board, size, queens)
-                    h_histories.append(h_history)
-                else:
-                    solution_found, steps, generations = algorithms.genetic_algorithm(queens, size)
+                    solution_found, steps, _ = algorithms.hill_climbing(board, size, queens)
+                elif algorithm == 'Genetic Algorithm':
+                    solution_found, steps, _ = algorithms.genetic_algorithm(queens, size)
+                elif algorithm == 'CSP Backtracking':
+                    solution_found, steps, exec_time = algorithms.CSP_backtracking(queens, size)
+                elif algorithm == 'CSP Forward Checking':
+                    solution_found, steps, exec_time = algorithms.CSP_forward(queens, size)
 
-                exec_time = time.time() - start_time
-                if solution_found:
-                    successes += 1
+                # Calcular el tiempo de ejecución si no se ha calculado dentro del algoritmo
+                exec_time = time.time() - start_time if 'exec_time' not in locals() else exec_time
                 times.append(exec_time)
                 steps_list.append(steps)
 
+                # Actualizar contadores si se encontró una solución óptima
+                if solution_found:
+                    successes += 1
+
+            # Almacenar datos adicionales para estadísticas finales
+            all_time_data[algorithm].extend(times)
+            all_steps_data[algorithm].extend(steps_list)
+
+            # Guardar resultados en la lista de resultados
             success_rate = (successes / runs) * 100
             avg_time = sum(times) / runs
             avg_steps = sum(steps_list) / runs
             std_time = (sum([(t - avg_time) ** 2 for t in times]) / runs) ** 0.5
             std_steps = (sum([(s - avg_steps) ** 2 for s in steps_list]) / runs) ** 0.5
-
             results.append({
                 'Size': size,
                 'Algorithm': algorithm,
@@ -55,46 +65,55 @@ def run_experiment(sizes=[4, 8, 10], runs=30, filename='results.csv'):
                 'Std Steps': std_steps
             })
 
-            # Guardar datos para las gráficas
-            time_data[algorithm].append(times)
-            steps_data[algorithm].append(steps_list)
-            success_data[algorithm].append(success_rate)
-            all_time_data[algorithm].extend(times)
-            all_steps_data[algorithm].extend(steps_list)
-            if algorithm != 'Genetic Algorithm':
-                h_history_data[algorithm].append(h_histories)
+    # Guardar todos los resultados en un archivo CSV
+    with open(filename, 'w', newline='') as csvfile:
+        fieldnames = ['Size', 'Algorithm', 'Success Rate (%)', 'Avg Time (s)', 'Std Time (s)', 'Avg Steps', 'Std Steps']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for result in results:
+            writer.writerow(result)
 
-    # Gráficos de tiempos y pasos para todos los tamaños combinados
+    # Generar gráficos de tiempo y pasos
     plot.whiskers(
-        data=[all_time_data[alg] for alg in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm']],
+        data=[all_time_data[alg] for alg in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm', 'CSP Backtracking', 'CSP Forward Checking']],
         title='Comparación de Tiempo para Todos los Tamaños',
         x_label='Algorithm',
         y_label='Execution Time (s)',
         filename='time_comparison_all_sizes',
-        algList=['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm']
+        algList=['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm', 'CSP Backtracking', 'CSP Forward Checking']
     )
 
     plot.whiskers(
-        data=[all_steps_data[alg] for alg in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm']],
+        data=[all_steps_data[alg] for alg in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm', 'CSP Backtracking', 'CSP Forward Checking']],
         title='Comparación de Estados Visitados para Todos los Tamaños',
         x_label='Algorithm',
         y_label='Number of Steps',
         filename='steps_comparison_all_sizes',
-        algList=['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm']
+        algList=['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm', 'CSP Backtracking', 'CSP Forward Checking']
     )
+    # Calcular y mostrar estadísticas de pasos
+    print("\n--- Estadísticas de Estados Previos (Promedio y Desviación Estándar) ---\n")
+    for algorithm in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm', 'CSP Backtracking', 'CSP Forward Checking']:
+        all_steps = all_steps_data[algorithm] 
+        if all_steps:
+            avg_steps = sum(all_steps) / len(all_steps)
+            std_steps = (sum((s - avg_steps) ** 2 for s in all_steps) / len(all_steps)) ** 0.5
+            print(f"{algorithm}:")
+            print(f"  Promedio de estados previos (steps): {avg_steps:.2f}")
+            print(f"  Desviacion estandar de estados previos (steps): {std_steps:.2f}\n")
 
-    # Agregar gráficos de la función H
-    for algorithm in ['Simulated Annealing', 'Hill Climbing']:
-        for i, size in enumerate(sizes):
-            # Asumiendo que quieres el promedio de las ejecuciones
-            num_runs = len(h_history_data[algorithm][i])
-            max_length = max(len(run_hh) for run_hh in
-                             h_history_data[algorithm][i])  # Máximo número de iteraciones en cualquier ejecución
-            avg_h_history = [sum(run_hh[j] for run_hh in h_history_data[algorithm][i] if j < len(run_hh)) / num_runs for
-                             j in range(max_length)]
-
-            plot.plotData2(avg_h_history, f"{algorithm.lower()}_h_function_{size}", range(1, max_length + 1),
-                           f"H Function Over Iterations for {algorithm} (Size {size})", "Iteration", "H Value", 10, 5)
+    # Calcular y mostrar estadísticas de tiempos de ejecución
+    print("\n--- Estadísticas de Tiempos de Ejecución (Promedio y Desviación Estándar) ---\n")
+    for algorithm in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm', 'CSP Backtracking', 'CSP Forward Checking']:
+        all_times = all_time_data[algorithm]
+        if all_times:
+            avg_time = sum(all_times) / len(all_times)
+            std_time = (sum((t - avg_time) ** 2 for t in all_times) / len(all_times)) ** 0.5
+            print(f"{algorithm}:")
+            print(f"  Promedio de tiempo de ejecucion: {avg_time:.2f} segundos")
+            print(f"  Desviacion estandar de tiempo de ejecucion: {std_time:.2f} segundos\n")
 
 
 run_experiment()
+
+

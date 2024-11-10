@@ -10,7 +10,7 @@ def run_experiment(sizes=[4, 8, 10], runs=30, filename='results.csv'):
     time_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
     steps_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
     success_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
-    h_history_data = {'Simulated Annealing': [], 'Hill Climbing': []}
+    h_history_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}  # Añadido para GA
     all_time_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
     all_steps_data = {'Simulated Annealing': [], 'Hill Climbing': [], 'Genetic Algorithm': []}
 
@@ -30,8 +30,9 @@ def run_experiment(sizes=[4, 8, 10], runs=30, filename='results.csv'):
                 elif algorithm == 'Hill Climbing':
                     solution_found, steps, h_history = algorithms.hill_climbing(board, size, queens)
                     h_histories.append(h_history)
-                else:
-                    solution_found, steps, generations = algorithms.genetic_algorithm(queens, size)
+                else:  # Algoritmo Genético
+                    solution_found, steps, generations, h_history = algorithms.genetic_algorithm(queens, size)
+                    h_histories.append(h_history)  # Almacenar el historial de h para el GA
 
                 exec_time = time.time() - start_time
                 if solution_found:
@@ -61,8 +62,7 @@ def run_experiment(sizes=[4, 8, 10], runs=30, filename='results.csv'):
             success_data[algorithm].append(success_rate)
             all_time_data[algorithm].extend(times)
             all_steps_data[algorithm].extend(steps_list)
-            if algorithm != 'Genetic Algorithm':
-                h_history_data[algorithm].append(h_histories)
+            h_history_data[algorithm].append(h_histories)  # Guardar el historial de h para cada algoritmo
 
     # Gráficos de tiempos y pasos para todos los tamaños combinados
     plot.whiskers(
@@ -84,17 +84,24 @@ def run_experiment(sizes=[4, 8, 10], runs=30, filename='results.csv'):
     )
 
     # Agregar gráficos de la función H
-    for algorithm in ['Simulated Annealing', 'Hill Climbing']:
+    for algorithm in ['Simulated Annealing', 'Hill Climbing', 'Genetic Algorithm']:
         for i, size in enumerate(sizes):
-            # Asumiendo que quieres el promedio de las ejecuciones
             num_runs = len(h_history_data[algorithm][i])
-            max_length = max(len(run_hh) for run_hh in
-                             h_history_data[algorithm][i])  # Máximo número de iteraciones en cualquier ejecución
-            avg_h_history = [sum(run_hh[j] for run_hh in h_history_data[algorithm][i] if j < len(run_hh)) / num_runs for
-                             j in range(max_length)]
+            max_length = max(len(run_hh) for run_hh in h_history_data[algorithm][i])
+            avg_h_history = [
+                sum(run_hh[j] for run_hh in h_history_data[algorithm][i] if j < len(run_hh)) / num_runs 
+                for j in range(max_length)
+            ]
 
-            plot.plotData2(avg_h_history, f"{algorithm.lower()}_h_function_{size}", range(1, max_length + 1),
-                           f"H Function Over Iterations for {algorithm} (Size {size})", "Iteration", "H Value", 10, 5)
-
+            plot.plotData2(
+                avg_h_history,
+                f"{algorithm.lower()}_h_function_{size}",
+                range(1, max_length + 1),
+                f"H Function Over Iterations for {algorithm} (Size {size})",
+                "Iteration",
+                "H Value",
+                10,
+                5
+            )
 
 run_experiment()

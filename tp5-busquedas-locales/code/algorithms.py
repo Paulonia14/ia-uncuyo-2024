@@ -112,10 +112,9 @@ def mutation(individual, size, mutation_rate=0.1):
 def genetic_algorithm(queens, size, population_size=100, max_generations=10000, mutation_rate=0.1):
     # Generar la población iniciald (reinas)
     population = [mutate_board(queens, size) for _ in range(population_size)]
-    fitnesses = []
-    for ind in population:
-        fitnesses.append(fitness_f(ind, size))
+    fitnesses = [fitness_f(ind, size) for ind in population]
     steps = 0
+    h_history = [min(fitnesses)]
     for generation in range(max_generations):
         steps += 1
         new_population = []
@@ -125,12 +124,13 @@ def genetic_algorithm(queens, size, population_size=100, max_generations=10000, 
             new_population.extend([child1, child2])
         # Mutación
         new_population = [mutation(child, size, mutation_rate) for child in new_population]
-        # nuevo fitness
         new_fitnesses = [fitness_f(ind, size) for ind in new_population]
+        # Actualizar historial de h
+        h_history.append(min(new_fitnesses))
         # Reemplazo (no elitista)
         population = new_population
         fitnesses = new_fitnesses
-        if max(fitnesses) == (size * (size - 1)) // 2:  # Solución óptima
-            return True, steps, generation
-    # Si no se encontró una solución
-    return False, steps, max_generations
+        if max(fitnesses) == (size * (size - 1)) // 2: # Solución óptima
+            return True, steps, generation, h_history
+    #No se encontró solución
+    return False, steps, max_generations, h_history

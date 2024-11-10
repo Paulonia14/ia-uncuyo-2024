@@ -79,11 +79,10 @@ def mutate_board(queens, size):
     new_queens[i], new_queens[j] = new_queens[j], new_queens[i]  # Intercambiar las reinas
     return new_queens
 
-
 def fitness_f(queens, size):
     total_pairs = (size * (size - 1)) // 2
-    attacks = h_function(queens)
-    fitness = total_pairs - attacks  # Cant pares - cant pares atacados = cant pares que no se atacan (fitness)
+    attacks = h_function(queens)  
+    fitness = total_pairs - attacks # Cant pares - cant pares atacados = cant pares que no se atacan (fitness)
     return fitness
 
 def selection(population, fitnesses):
@@ -135,5 +134,69 @@ def genetic_algorithm(queens, size, population_size=100, max_generations=10000, 
     # Si no se encontró una solución
     return False, steps, max_generations
 
+
+# --- CSP Backtracking ---
+def is_safe(queens, row, col):
+    # Pos Segura
+    for q_row, q_col in queens:
+        if q_col == col or q_row == row or abs(q_row - row) == abs(q_col - col):
+            return False
+    return True
+
+def backtrack(queens, size, col=0, steps=[0]):
+    steps[0] += 1
+    # Se encontró solucion
+    if col >= size:
+        return True, list(queens) 
+    for row in range(size):
+        if is_safe(queens, row, col):
+            queens.append((row, col))
+            solution_found, solution = backtrack(queens, size, col + 1, steps)
+            if solution_found:
+                return True, solution
+            queens.pop()  # Backtrack
+    return False, []
+
 def CSP_backtracking(queens, size):
-    pass
+    queens.clear()  
+    start_time = time.time()
+    steps = [0]
+    solution_found, solution = backtrack(queens, size, steps=steps)
+    exec_time = time.time() - start_time
+    return solution_found, steps[0], exec_time
+
+# --- CSP Forward Checking ---
+def forward_checking(queens, size, domain, col=0, steps=[0]):
+    steps[0] += 1
+    # Se encontró solucion
+    if col >= size:
+        return True, list(queens)
+    for row in domain[col][:]:  # Copia del dominio
+        if is_safe(queens, row, col):
+            queens.append((row, col))
+            new_domain = [list(d) for d in domain]
+            # Elimina filas en conflicto
+            for next_col in range(col + 1, size):
+                if row in new_domain[next_col]:
+                    new_domain[next_col].remove(row)
+                diag1 = row + (next_col - col)
+                diag2 = row - (next_col - col)
+                if diag1 >= 0 and diag1 < size and diag1 in new_domain[next_col]:
+                    new_domain[next_col].remove(diag1)
+                if diag2 >= 0 and diag2 < size and diag2 in new_domain[next_col]:
+                    new_domain[next_col].remove(diag2)
+            solution_found, solution = forward_checking(queens, size, new_domain, col + 1, steps)
+            if solution_found:
+                return True, solution
+            queens.pop()  # Backtrack
+    return False, []
+
+def CSP_forward(queens, size):
+    start_time = time.time()
+    steps = [0]
+    queens.clear()
+    # Inicializa el dominio para cada columna
+    domain = [list(range(size)) for _ in range(size)]
+    solution_found, solution = forward_checking(queens, size, domain, steps=steps)
+    exec_time = time.time() - start_time
+    return solution_found, steps[0], exec_time

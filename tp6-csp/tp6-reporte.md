@@ -51,6 +51,34 @@ más grandes.
 ---
 ## Ejercicio 7
 
+Se van a comparar los nuevos algoritmos implementados con los del Trabajo Práctico anterior. Para ello, se van a realizar gráficos de cajas y extensiones.
 
+#### Tiempos de ejecución
 
+![Comparación de los tiempos de los algoritmos](./images/time_comparison_all_sizes.png)
 
+En este gráfico se ven los tiempos de ejecución de los 2 algoritmos, comparándolos con los demás, teniendo en cuenta todos los tamaños de entorno. Se puede observar que el algoritmo de backtracking utilizando forward checking es más rápido que el de backtracking.
+
+#### Estados explorados
+
+![Comparación de los estados explorados por los algoritmos](./images/steps_comparison_all_sizes.png)
+
+En este gráfico se ven los estados explorados de los 2 algoritmos, comparándolos con los demás, teniendo en cuenta todos los tamaños de entorno. No se puede observar bien cuál explora más o menos estados, por lo que vamos a observar de acuerdo a el promedio y la desviación estandar de cada uno.
+
+![Promedio y Desviación Estándar de los estados explorados](./images/steps_avg_desv_est.png)
+
+Ahora se puede observar que el algoritmo CSP que utiliza forward checking explora menos estados que el de backtracking.
+
+#### Porcentaje de éxito
+
+| Algoritmo            | Porcentaje de Éxito (%) |
+|----------------------|-------------------------|
+| CSP Backtracking     | 100%                    |
+| CSP Forward Checking | 100%                    |
+
+Se puede observar que los dos algoritmos tienen un 100% de éxito, ya que encuentran una solución para todos los casos y en todos los tamaños.
+
+#### Comparar los resultados con aquellos obtenidos en el Trabajo Práctico N° 5.
+
+Los algoritmos CSP han explorado menos estados, aunque el CSP utilizando backtracking ha sido más lento que los demás algoritmos. Los dos CSP al tener 100% porcentaje de éxito, se podría decir que el que conviene utilizar es el CSP utilizando forward checking, ya que es más rápido y explora menos estados. Aunque el CSP con Forward Checking es más lento que, por ejemplo, Simulated Annealing, este último no garantiza una solución en todos los casos (al igual que los demás del trabajo práctico 5). 
+Por lo tanto, considero que el mejor algoritmo para resolver el problema de las N-Reinas es el CSP utilizando Forward Checking.

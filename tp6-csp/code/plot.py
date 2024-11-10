@@ -5,6 +5,7 @@ import numpy
 
 # Realiza el gráfico de cajas y extensiones.
 def whiskers(data, title, x_label, y_label, filename, algList, executeRemoveEmpty=False):
+    
     print("Iniciando la función whiskers...")  # Depuración
     if executeRemoveEmpty:
         data = removeEmpty(data)
